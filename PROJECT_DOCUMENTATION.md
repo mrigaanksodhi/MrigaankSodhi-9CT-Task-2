@@ -6,7 +6,7 @@
 The frequency of accidental fires in Australia has jumped in the past couple of years. Fires can start because of multiple reasons such as natural causes (bushfires from sunlight, lightning strikes and volcanic activity) but are mainly caused by human error (85-90%). Instances of neglect such as unattended cooking, overloaded powerstrips/excess electricity and poor management cause a plethora of fires annually.
 
 #### Proposed Solution
-We will design a alarm system that will be put next to stove tops that will ring a highly intense noise when the burner has been left unattended for more than 3 minutes. It will use heat sensors to check. The user can also press a button that, when pressed sets a timer for 5 minutes, lighting an LED that gets brighter the more the timer goes down. 
+We will design an alarm system that will be put next to stove tops that will ring a highly intense noise when the burner has been left unattended for more than 3 minutes. It will use heat sensors to check. The user can also press a button that, when pressed sets a timer for 5 minutes, lighting an LED that gets brighter the more the timer goes down. 
 
 #### Key Actions
 -  **Automatic Alarm:**  After 3 minutes unattended an automatic intense buzzer will ring 
@@ -37,5 +37,4 @@ We will design a alarm system that will be put next to stove tops that will ring
 - Heat sensors - Should consistently detect heat input every once per second
 - Buttons - Should always turn off and on timer with additional clicks stacking time
 - LED - Should always go from dim to bright in the duration that the timer is on
-- 
 
