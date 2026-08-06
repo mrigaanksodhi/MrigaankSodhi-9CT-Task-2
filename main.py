@@ -1,5 +1,29 @@
+from machine import Pin, ADC
+import time
+
+
+
 #main program
-print('hello')
+heat_sensor = ADC(Pin(26)) 
+buzzer = Pin(20, Pin.out)
+led = Pin(16, Pin.out)
+
+
+
+
+
+
+
+            #def start_timer(seconds):  Method 1
+                #while seconds >= 0:
+                    #seconds = seconds - 1
+                    #time.sleep(1)
+while time <= 300:   # Method 2
+    time = time + 1
+    time.sleep(1)
+    if time == 300:
+     print ('hello') #testing if it works
+
 # Automatic alarm function
 
 
