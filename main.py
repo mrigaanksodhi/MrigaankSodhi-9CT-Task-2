@@ -26,16 +26,17 @@ while True:
     timer_pressed = timer_button.value() #checks how many times it is pressed
 
     if sensor_reading > heat_line:   #if the reading is more than 100 degrees it starts a timer for 3 minutes
-      if heat_detected == 0:
-       heat_detected = 1
-       heat_start_time = current_time
-      if current_time - heat_start_time >= auto_alarm_limit:   # Once it has been more than 3 minutes the buzzer turns on
-         buzzer.value(1)
-      else: 
+        if heat_detected == 0:
+            heat_detected = 1
+            heat_start_time = current_time
+        if current_time - heat_start_time >= auto_alarm_limit:   # Once it has been more than 3 minutes the buzzer turns on
+            buzzer.value(1)
+        else: 
+            buzzer.value(0)
+    else: 
        heat_detected = 0
        heat_start_time = 0
-    else: 
-       buzzer.value(0)
+    
 
     if timer_pressed:
 
@@ -46,6 +47,7 @@ while True:
             timer_start = current_time
 
         time.sleep(0.3)
+
 
 # All that is left is end button and working on timer function
 
@@ -61,3 +63,4 @@ while True:
             led.duty_u16(45000)
         else:
            led.duty_u16(65000)
+        
