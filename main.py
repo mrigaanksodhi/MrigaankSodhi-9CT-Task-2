@@ -1,7 +1,7 @@
 from machine import Pin, ADC, PWM
 import time
 
-heat_line = 100
+heat_line = 40000
 
 
 heat_detected = 0
@@ -14,10 +14,12 @@ auto_alarm_limit = 300
 
 #main program
 heat_sensor = ADC(Pin(26)) 
-timer_button = Pin(14, Pin.IN, Pin.PULL_DOWN)
-end_button = Pin(15, Pin.IN, Pin.PULL_DOWN)
+timer_button = Pin(14, Pin.IN, Pin.PULL_UP)
+end_button = Pin(15, Pin.IN, Pin.PULL_UP)
 
-buzzer = Pin(20, Pin.OUT)
+buzzer = PWM(Pin(20))
+buzzer.freq(2000)
+buzzer.duty_u16(0)
 led = PWM(Pin(16))
 
 while True:
@@ -30,14 +32,14 @@ while True:
             heat_detected = 1
             heat_start_time = current_time
         if current_time - heat_start_time >= auto_alarm_limit:   # Once it has been more than 3 minutes the buzzer turns on
-            buzzer.value(1)
+            buzzer.duty_u16(32768)
         
     else: 
        heat_detected = 0
        heat_start_time = 0
     
 
-    if timer_pressed:
+    if timer_pressed == 0:
 
         total_timer = total_timer + 300    #Adds 5 mins to the timer
 
@@ -51,7 +53,7 @@ while True:
         tp = current_time - timer_start   #Time passed
         time_left = total_timer - tp
         if time_left <= 0:
-            buzzer.value(1)
+            buzzer.duty_u16(32768)
             timer_active = 0   # timer turns off as its finished
             total_timer = 0   # resets total timer
 
@@ -70,8 +72,8 @@ while True:
            led.duty_u16(65535)
 
 # End BUtton
-    if end_button.value() == 1:
-        buzzer.value(0)
+    if end_button.value() == 0:
+        buzzer.duty_u16(0)
         led.duty_u16(0)
         timer_active = 0
         total_timer = 0
