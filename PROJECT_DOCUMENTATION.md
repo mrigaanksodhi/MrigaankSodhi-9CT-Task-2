@@ -38,3 +38,38 @@ We will design an alarm system that will be put next to stove tops that will rin
 - Buttons - Should always turn off and on timer with additional clicks stacking time
 - LED - Should always go from dim to bright in the duration that the timer is on
 
+### PMI
+Plus: What is good about the solution? Does it meet the need and requirements well? Does it function perfectly? Is the code efficient?
+
+Minus: What leaves a bit to be desired? Does it perhaps not completely suit the need? Does it miss out on some test cases / requirements? Is the code inefficient / does it lack functions or data structures? Does the final product not completely function?
+
+Implication: Look at the positive and negative points, then evaluate the implications of what you have learned from these for the person you are evaluating. How will this knowledge impact their final outcome / what improvements they may need to make?
+
+Kevin Zhu
+Plus - The circuitry functions properly, without any visible errors or misplaced wiring. In the end the program achieves its task (to detect heat at a constant temp for set time and output an alarm) with the use of a heat sensor, a few buttons, a led and a buzzer.
+Minus - Demo was a bit too long, in the middle where nothing happened. 
+Implication - A way to improve this in the future is to add efficient code but overall the program works flawlessly
+
+Alfonso Delgado
+Plus - Nice clean code - sets up all the variables and needed Pins in a clear and orderly way. Has clear comments, explaining how each line of code functions. Works as intended. Smart use of space - using two circuit boards. 
+Minus - Wires can maybe be organised a tad bit better. Buttons don't have a distinct way to identify them.
+Implication - A way you can improve this is to make the buttons more distinct, such as maybe colour the end button, a red.
+
+Fayaaz Kabir
+Plus - The idea is really good, the actual execution also works and meets functional requirements.
+Minus - The execution is somewhat confusing at some points, and having it be turned on and off manually doesn't seem like a good idea.
+Implication - Overall, the idea and execution of the idea work well, with a few setbacks. The design appears to be a smaller demonstration of a much larger project, so the manual button ons and offs and the short times do make sense in this context.
+### Final Evaluations
+
+Evaluate your Final Test in Relation to Functional Criteria
+
+Evaluate your Final Test in Relation to Non-Functional Criteria
+
+Evaluate your Final Performance in Relation to the Identified Need
+
+Evaluate your Project in Relation to Project Management
+
+Evaluate your Project in Relation to Peer Feedback.
+
+Justify Future Improvements you could make to your Final Product
+
