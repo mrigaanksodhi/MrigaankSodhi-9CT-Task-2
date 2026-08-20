@@ -10,7 +10,7 @@ timer_active = 0  #if not active 0 if active then 1
 total_timer = 0  #total time left on timer even after stacking
 timer_start = 0
 buzzer = 0
-auto_alarm_limit = 300
+auto_alarm_limit = 180
 
 #main program
 heat_sensor = ADC(Pin(26)) 
@@ -60,14 +60,14 @@ while True:
 
 #led brightness
     if timer_active == 1:
-        if time_left > 240:
+        if time_left > total_timer * 0.8:
             led.duty_u16(10000)
-        elif time_left > 180:
+        elif time_left > total_timer * 0.6:
            led.duty_u16(20000)
-        elif time_left > 120:
-            led.duty_u16(30000)
-        elif time_left > 60:
-            led.duty_u16(45000)
+        elif time_left > total_timer * 0.4:
+            led.duty_u16(35000)
+        elif time_left > total_timer * 0.2:
+            led.duty_u16(50000)
         else:
            led.duty_u16(65535)
 
@@ -81,4 +81,4 @@ while True:
         heat_start_time = 0
         time.sleep(0.5)
 
-    time.sleep(0.01)   #so pico doesnt overheat quickly
+    time.sleep(1)   #so pico doesnt overheat quickly

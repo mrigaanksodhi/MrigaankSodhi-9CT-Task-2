@@ -38,6 +38,77 @@ We will design an alarm system that will be put next to stove tops that will rin
 - Buttons - Should always turn off and on timer with additional clicks stacking time
 - LED - Should always go from dim to bright in the duration that the timer is on
 
+### Algorithms
+**Flowchart:**
+[Excalidraw Flowchart](https://excalidraw.com/#json=o52NDQPMBlxHZ63smCXED,PVgHCd79aU0KJ1tnWESsAA)
+
+**Pseudocode:**
+This is a simple prototype pseudocode:
+
+Set up the heat sensor, buttons, LED and buzzer
+
+WHILE
+    Check if the stove is hot
+    IF the stove has been hot for 3 minutes
+        Sound the buzzer
+    END IF
+
+    IF the button is pressed
+        Start a 5-minute timer
+        Turn the LED on
+    END IF
+
+    IF the timer button is pressed again
+        Add another 5 minutes to the timer
+    END IF
+
+    As the timer gets closer to finishing
+        Make the LED brighter
+    END
+
+    IF the timer finishes
+        Sound the alarm
+    END IF
+
+    IF the end button is pressed
+        Turn off the alarm
+        Turn off the LED
+        Reset the timer
+    END IF
+
+END WHILE
+
+### Testing and Debugging
+#### Test case 1: Stove on for 3 minutes
+| Input | Process | Output |
+|-------|---------|--------|
+|Heat sensor detects a high temperature continuously for 3 minutes |Program records when heat is first detected and continuously checks if temp remains above threshold|    An alarm rings after 3 minutes of continuous heat being detected
+
+**Outline:** I used variables to store time when heat was first detected and compared to current time, also making sure the timer reset if the temp dropped below threshold before the 3 minutes
+
+**Evaluation** 
+The test/demo was successful because the program was able to detect a constant temp above the heat threshold (set to room temp for testing). I adjusted the threshold and timer values for the demo to make it quick and simple but still essentially be the same as the normal code.
+
+#### Test case 2: Button is pressed twice
+|Input|Process|Output|
+|-----|-------|------|
+|The button is pressed 2 times| The program detects 2 button presses and adds time accordingly| LED turns on dimly and the set timer is set
+
+**Outline:** The button input needed to reliably detect individual presses. I needed to check the wiring and GPIO pins because the buttons were initially not being detected correctly. 
+
+**Evaluation:** The test was successful once the button inputs and wiring were corrected as before the buttons weren't being detected. I extensively tested each button individually to see which GP pins were connected and if they were connected to GND or not. The most challenging part was identifying why the button presses were initially not detected and after testing I realised the fault was in my wiring. Overall, the program could be improved by adding some sort of code that prevents one press from being counted multiple times.
+
+
+#### Test case 3: Stove is not on
+|Input|Process|Output|
+|-----|-------|------|
+|Heat sensor does not detect any high temp| THe program checks the snsor value and determines the heat is below the threshold| Nothing happens and the LED and buzzer remain off |
+
+**Outline:** The program needed to make sure the heat timer did not run when the stove was off. I added an else statement that resets the heat detected and start time to 0 when sensor reading is below threshold
+
+**Evaluate** This test had no errors as the program remained inactive when the heat sensor did not detect a high enough value. I tried with various temps and tested if the timer went to 0 when the temp dropped. All tests were successful and stopped the buzzer from turning on. 
+
+
 ### PMI
 Plus: What is good about the solution? Does it meet the need and requirements well? Does it function perfectly? Is the code efficient?
 
@@ -45,31 +116,64 @@ Minus: What leaves a bit to be desired? Does it perhaps not completely suit the 
 
 Implication: Look at the positive and negative points, then evaluate the implications of what you have learned from these for the person you are evaluating. How will this knowledge impact their final outcome / what improvements they may need to make?
 
-Kevin Zhu
-Plus - The circuitry functions properly, without any visible errors or misplaced wiring. In the end the program achieves its task (to detect heat at a constant temp for set time and output an alarm) with the use of a heat sensor, a few buttons, a led and a buzzer.
-Minus - Demo was a bit too long, in the middle where nothing happened. 
-Implication - A way to improve this in the future is to add efficient code but overall the program works flawlessly
+**Kevin Zhu**
 
-Alfonso Delgado
-Plus - Nice clean code - sets up all the variables and needed Pins in a clear and orderly way. Has clear comments, explaining how each line of code functions. Works as intended. Smart use of space - using two circuit boards. 
-Minus - Wires can maybe be organised a tad bit better. Buttons don't have a distinct way to identify them.
-Implication - A way you can improve this is to make the buttons more distinct, such as maybe colour the end button, a red.
+|   Plus    |   Minus   |   Implication |
+|-----------|-----------|---------------|
+|The circuitry functions properly, without any visible errors or misplaced wiring. In the end the program achieves its task (to detect heat at a constant temp for set time and output an alarm) with the use of a heat sensor, a few buttons, a led and a buzzer. | Demo was a bit too long, in the middle where nothing happened. | A way to improve this in the future is to add efficient code but overall the program works flawlessly
 
-Fayaaz Kabir
-Plus - The idea is really good, the actual execution also works and meets functional requirements.
-Minus - The execution is somewhat confusing at some points, and having it be turned on and off manually doesn't seem like a good idea.
-Implication - Overall, the idea and execution of the idea work well, with a few setbacks. The design appears to be a smaller demonstration of a much larger project, so the manual button ons and offs and the short times do make sense in this context.
+
+**Alfonso Delgado**
+|   Plus    |   Minus   |   Implication |
+|-----------|-----------|---------------|
+|Nice clean code - sets up all the variables and needed Pins in a clear and orderly way. Has clear comments, explaining how each line of code functions. Works as intended. Smart use of space - using two circuit boards.  |Wires can maybe be organised a tad bit better. Buttons don't have a distinct way to identify them. |A way you can improve this is to make the buttons more distinct, such as maybe colour the end button, a red.
+
+**Fayaaz Kabir**
+|   Plus    |   Minus   |   Implication |
+|-----------|-----------|---------------|
+|The idea is really good, the actual execution also works and meets functional requirements.|The execution is somewhat confusing at some points, and having it be turned on and off manually doesn't seem like a good idea.|Overall, the idea and execution of the idea work well, with a few setbacks. The design appears to be a smaller demonstration of a much larger project, so the manual button ons and offs and the short times do make sense in this context.
+
+**Aarav Rangi**
+|   Plus    |   Minus   |   Implication |
+|-----------|-----------|---------------|
+|The program meets its main requirements and the heat sensor, LED and buzzer work together well. |Some parts of the code could be simpler and easier to understand. | Improving and simplifying the code could make the program easier to fix and improve later.
+
+
+
 ### Final Evaluations
 
-Evaluate your Final Test in Relation to Functional Criteria
+**Evaluate your Final Test in Relation to Functional Criteria:**
 
-Evaluate your Final Test in Relation to Non-Functional Criteria
+Overall, my final product was successful at meeting most of the functional requirements that I idenitified at the beginning. The heat sensor was able to detect when the temp was above a chosen threshold and begin tracking how long that temp had been continuosly detected. After the requred amount of time (3mins) the buzzer would activate to alert the user. The timer button also worked by adding a certain time for every press, meaning multiple presses would stack the timer forcing an LED to gradually become brighter as the time decreased. The end button was able to stop the buzzer and essentially reset the main parts of the system. There were some minor issues I discovered during testing primarily with wiring and these were resolved through research about the pico and repeated testing. 
 
-Evaluate your Final Performance in Relation to the Identified Need
+**Evaluate your Final Test in Relation to Non-Functional Criteria:**
 
-Evaluate your Project in Relation to Project Management
+The final product also satisfied a majority of the non-functional requriements. The heat sensor worked well and could repeatedly detect a change in temperature to give input to the program. I modified the heat threshold and timer values during testing so that I could demonstrate the program in less time but use the same logic as my final program. The buttons were a bit harder mainly beacuse of the wiring, and the LED successfully increased in brightness as the timer progressed, providing a visual indication of the remaining time. However, the button detection could still be improved by implementing a more reliable debouncing system rather than only using a short delay.
 
-Evaluate your Project in Relation to Peer Feedback.
 
-Justify Future Improvements you could make to your Final Product
+**Evaluate your Final Performance in Relation to the Identified Need:**
 
+The need that this project was intended to address was the prevention of fires due to unattended cooking. My final prototype of the project fulfills this by detecting high temperatures and notifying the user by sounding an alarm once the temperature has been reached for a certain duration of time. The added timer system serves as a reminder of when the stove has been left unattended for too long. While the project is just a prototype and requires more development to be incorporated into an actual kitchen, it demonstrates the core idea of the proposed solution. The use of the temperature sensor along with the buzzer and the timer with an LED creates multiple reminders for the user. Therefore, I believe the project effectively addresses the identified need and shows how technology could potentially be used to reduce the risk of unattended cooking.
+
+**Evaluate your Project in Relation to Project Management:**
+
+Throughout the development there were MANY areas of managment. The structure given to help time management was rather helpful as it ensured that I stayed on track and had a way of checking if I was falling behind or not. There were 2 main components in the task, the circuitry and the code. I mostly did the code and Zachary helped with the circuitry, dividing the work between us. Although final circuit was assembled by me Zachary was a huge help. The code took a long time as it was confusing for me and I took multiple lessons understanding the components and how to code them. There were several challenges, particularly when wiring and testing the buttons, as they were initially not being detected by the program. To solve this, I tested the components individually, checked which GPIO pins they were connected to and adjusted the wiring where necessary.
+
+Overall the project management was decent, it could be further improved by having more layoff/time to test rather than cramming it in the last week. I could have tested the circuit sooner as this may have allowed the wiring issues to be identified sooner. Generally however, I was able to manage the problems that occurred and make changes to the program and circuit until the main features were working.
+
+**Evaluate your Project in Relation to Peer Feedback:**
+
+The peer feedback given was mainly positive and confirmed that the main features were all working properly. The feedback included that the program was effectively organized, the circuitry worked properly, and the combination of the heat sensor, LED, and buzzer were operating together successfully to fulfill the objective of the project. The use of comments and organised variables in the code was also identified as a positive aspect.
+
+However some peers suggested that the wiring could have been organised more neatly and the buttons should be easier to identify. The feedback was useful because it showed that while the functionality of the project was successful, there were still improvements that could make the final product more user-friendly.
+
+**Justify Future Improvements you could make to your Final Product:**
+
+If I were to continue developing this project, one of the main improvements I would make would be to improve the physical design of the circuit. The buttons could be labelled or given different colours so that the user can immediately identify which button starts the timer and which button stops the alarm. The wiring could also be organised more neatly to make the circuit easier to understand, troubleshoot and use.
+
+### Bibliography 
+- [MicroPython Website](https://micropython.org/resources/docs/en/latest/index.html) Really helped me understand the heat sensor, PWM for led and buzzer, GPIO pins and buttons. Has a range of sub sections/different things to help with on website
+- [LED Fading help](https://randomnerdtutorials.com/raspberry-pi-pico-pwm-micropython/?utm_source=chatgpt.com) Helped me understand the LED fading and also provided the pin/GPIO diagram that helped in wiring.
+- [Raspberry Pico Pi tutorials](https://core-electronics.com.au/courses/raspberry-pi-pico-workshop/) - These helped me understand the code and wiring a little bit as well as explaining key details/functions
+- [Initial LED Source](https://techcraftandhacks.in/led-brighter-dimmer/) This was my original source to understand the LED as that was the part I was stuck on, at that time. Later on, I found out it was in c++ for arduino so I changed it.
+- Zachary used various other undocumented sources for the heat sensor and other parts
