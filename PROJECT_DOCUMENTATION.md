@@ -45,36 +45,81 @@ We will design an alarm system that will be put next to stove tops that will rin
 **Pseudocode:**
 This is a simple prototype pseudocode:
 
+**Main Routine:**
+
 Set up the heat sensor, buttons, LED and buzzer
 
-WHILE
-    Check if the stove is hot
-    IF the stove has been hot for 3 minutes
-        Sound the buzzer
-    END IF
+WHILE TRUE
 
-    IF the button is pressed
-        Start a 5-minute timer
-        Turn the LED on
-    END IF
+  Check the heat sensor
+  Run the Heat Detection subroutine
 
-    IF the timer button is pressed again
-        Add another 5 minutes to the timer
-    END IF
+  Check if the timer button has been pressed
+  Run the Timer subroutine
 
-    As the timer gets closer to finishing
-        Make the LED brighter
-    END
+  Check if the end button has been pressed
 
-    IF the timer finishes
-        Sound the alarm
-    END IF
+  IF the end button is pressed THEN
+    Turn off the buzzer
+    Turn off the LED
+    Reset the timer
+     Reset the heat detection timer
+  END IF
 
-    IF the end button is pressed
-        Turn off the alarm
-        Turn off the LED
-        Reset the timer
-    END IF
+END WHILE
+
+**Subroutine 1 :**
+
+START Heat Detection
+
+Read the heat sensor
+
+IF a high temperature is detected THEN
+
+ Start tracking how long the heat is detected
+
+ IF the high temperature has been detected for 3 minutes THEN
+    Turn on the buzzer
+END IF
+
+ELSE
+
+ Reset the heat detection timer
+
+END IF
+
+RETURN
+
+**Subroutine 2:**
+
+START Timer
+
+Check if the timer button has been pressed
+
+IF the button is pressed THEN
+
+  Add 5 minutes to the timer
+
+  IF the timer is not already running THEN
+    Start the timer
+  END IF
+
+END IF
+
+**Subroutine 3:**
+
+
+WHILE the timer is running
+
+  Calculate the remaining time
+
+  As the timer gets closer to finishing
+    Increase the LED brightness
+
+  IF the timer reaches zero THEN
+    Turn on the buzzer
+    Stop the timer
+  END IF
 
 END WHILE
 
@@ -155,25 +200,25 @@ The final product also satisfied a majority of the non-functional requriements. 
 
 The need that this project was intended to address was the prevention of fires due to unattended cooking. My final prototype of the project fulfills this by detecting high temperatures and notifying the user by sounding an alarm once the temperature has been reached for a certain duration of time. The added timer system serves as a reminder of when the stove has been left unattended for too long. While the project is just a prototype and requires more development to be incorporated into an actual kitchen, it demonstrates the core idea of the proposed solution. The use of the temperature sensor along with the buzzer and the timer with an LED creates multiple reminders for the user. Therefore, I believe the project effectively addresses the identified need and shows how technology could potentially be used to reduce the risk of unattended cooking.
 
-**Evaluate your Project in Relation to Project Management:**
+    **Evaluate your Project in Relation to Project Management:**
 
-Throughout the development there were MANY areas of managment. The structure given to help time management was rather helpful as it ensured that I stayed on track and had a way of checking if I was falling behind or not. There were 2 main components in the task, the circuitry and the code. I mostly did the code and Zachary helped with the circuitry, dividing the work between us. Although final circuit was assembled by me Zachary was a huge help. The code took a long time as it was confusing for me and I took multiple lessons understanding the components and how to code them. There were several challenges, particularly when wiring and testing the buttons, as they were initially not being detected by the program. To solve this, I tested the components individually, checked which GPIO pins they were connected to and adjusted the wiring where necessary.
+    Throughout the development there were MANY areas of managment. The structure given to help time management was rather helpful as it ensured that I stayed on track and had a way of checking if I was falling behind or not. There were 2 main components in the task, the circuitry and the code. I mostly did the code and Zachary helped with the circuitry, dividing the work between us. Although final circuit was assembled by me Zachary was a huge help. The code took a long time as it was confusing for me and I took multiple lessons understanding the components and how to code them. There were several challenges, particularly when wiring and testing the buttons, as they were initially not being detected by the program. To solve this, I tested the components individually, checked which GPIO pins they were connected to and adjusted the wiring where necessary.
 
-Overall the project management was decent, it could be further improved by having more layoff/time to test rather than cramming it in the last week. I could have tested the circuit sooner as this may have allowed the wiring issues to be identified sooner. Generally however, I was able to manage the problems that occurred and make changes to the program and circuit until the main features were working.
+    Overall the project management was decent, it could be further improved by having more layoff/time to test rather than cramming it in the last week. I could have tested the circuit sooner as this may have allowed the wiring issues to be identified sooner. Generally however, I was able to manage the problems that occurred and make changes to the program and circuit until the main features were working.
 
-**Evaluate your Project in Relation to Peer Feedback:**
+    **Evaluate your Project in Relation to Peer Feedback:**
 
-The peer feedback given was mainly positive and confirmed that the main features were all working properly. The feedback included that the program was effectively organized, the circuitry worked properly, and the combination of the heat sensor, LED, and buzzer were operating together successfully to fulfill the objective of the project. The use of comments and organised variables in the code was also identified as a positive aspect.
+    The peer feedback given was mainly positive and confirmed that the main features were all working properly. The feedback included that the program was effectively organized, the circuitry worked properly, and the combination of the heat sensor, LED, and buzzer were operating together successfully to fulfill the objective of the project. The use of comments and organised variables in the code was also identified as a positive aspect.
 
-However some peers suggested that the wiring could have been organised more neatly and the buttons should be easier to identify. The feedback was useful because it showed that while the functionality of the project was successful, there were still improvements that could make the final product more user-friendly.
+    However some peers suggested that the wiring could have been organised more neatly and the buttons should be easier to identify. The feedback was useful because it showed that while the functionality of the project was successful, there were still improvements that could make the final product more user-friendly.
 
-**Justify Future Improvements you could make to your Final Product:**
+    **Justify Future Improvements you could make to your Final Product:**
 
-If I were to continue developing this project, one of the main improvements I would make would be to improve the physical design of the circuit. The buttons could be labelled or given different colours so that the user can immediately identify which button starts the timer and which button stops the alarm. The wiring could also be organised more neatly to make the circuit easier to understand, troubleshoot and use.
+    If I were to continue developing this project, one of the main improvements I would make would be to improve the physical design of the circuit. The buttons could be labelled or given different colours so that the user can immediately identify which button starts the timer and which button stops the alarm. The wiring could also be organised more neatly to make the circuit easier to understand, troubleshoot and use.
 
-### Bibliography 
-- [MicroPython Website](https://micropython.org/resources/docs/en/latest/index.html) Really helped me understand the heat sensor, PWM for led and buzzer, GPIO pins and buttons. Has a range of sub sections/different things to help with on website
-- [LED Fading help](https://randomnerdtutorials.com/raspberry-pi-pico-pwm-micropython/?utm_source=chatgpt.com) Helped me understand the LED fading and also provided the pin/GPIO diagram that helped in wiring.
-- [Raspberry Pico Pi tutorials](https://core-electronics.com.au/courses/raspberry-pi-pico-workshop/) - These helped me understand the code and wiring a little bit as well as explaining key details/functions
-- [Initial LED Source](https://techcraftandhacks.in/led-brighter-dimmer/) This was my original source to understand the LED as that was the part I was stuck on, at that time. Later on, I found out it was in c++ for arduino so I changed it.
-- Zachary used various other undocumented sources for the heat sensor and other parts
+    ### Bibliography 
+    - [MicroPython Website](https://micropython.org/resources/docs/en/latest/index.html) Really helped me understand the heat sensor, PWM for led and buzzer, GPIO pins and buttons. Has a range of sub sections/different things to help with on website
+    - [LED Fading help](https://randomnerdtutorials.com/raspberry-pi-pico-pwm-micropython/?utm_source=chatgpt.com) Helped me understand the LED fading and also provided the pin/GPIO diagram that helped in wiring.
+    - [Raspberry Pico Pi tutorials](https://core-electronics.com.au/courses/raspberry-pi-pico-workshop/) - These helped me understand the code and wiring a little bit as well as explaining key details/functions
+    - [Initial LED Source](https://techcraftandhacks.in/led-brighter-dimmer/) This was my original source to understand the LED as that was the part I was stuck on, at that time. Later on, I found out it was in c++ for arduino so I changed it.
+    - Zachary used various other undocumented sources for the heat sensor and other parts
