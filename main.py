@@ -27,7 +27,7 @@ while True:
     sensor_reading = heat_sensor.read()
     timer_pressed = timer_button.value() #checks how many times it is pressed
 
-    if sensor_reading > heat_line:   #if the reading is more than 100 degrees it starts a timer for 3 minutes
+    if sensor_reading > heat_line:   #if the reading is more than heat line it starts a timer for 3 minutes
         if heat_detected == 0:
             heat_detected = 1
             heat_start_time = current_time
